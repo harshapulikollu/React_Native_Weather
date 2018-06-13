@@ -36,21 +36,21 @@ componentDidMount(){
           longitude: String(position.coords.longitude),
           error: null,
         });
-        // FetchWeathermtd(lat, lon)
-        // .then((response) => {
-        //   let cityDetails = response.city;
-        //   let weatherList = response.list[0];
-        //   console.log(weatherList);
-        //   this.setState({
-        //     animating: false,
-        //     temperature: weatherList.main.temp,
-        //     city: cityDetails.name,
-        //     country: cityDetails.country,
-        //     weatherType: weatherList.weather[0].main,
-        //     icon: FetchWeatherImage(weatherList.weather[0].icon)
-               color: FetchBgColor(Math.floor(Math.random() * 10)+1)
-        //   });
-        // });
+        FetchWeathermtd(lat, lon)
+        .then((response) => {
+          let cityDetails = response.city;
+          let weatherList = response.list[0];
+          console.log(weatherList);
+          this.setState({
+            animating: false,
+            temperature: weatherList.main.temp,
+            city: cityDetails.name,
+            country: cityDetails.country,
+            weatherType: weatherList.weather[0].main,
+            icon: FetchWeatherImage(weatherList.weather[0].icon),
+            color: FetchBgColor(Math.floor(Math.random() * 10)+1)
+          });
+        });
       },
       (error) => this.setState({ error: error.message }),
       { enableHighAccuracy: false, timeout: 200000, maximumAge: 1000 },
@@ -82,7 +82,7 @@ componentDidMount(){
             </View>
            </View>
            <View style ={Style.BottomContainer}>
-           
+
            </View>
       </View>
 

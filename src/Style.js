@@ -34,7 +34,8 @@ var Style = StyleSheet.create({
 
   },
   weatherTypeTextConatiner: {
-    fontSize: 25
+    fontSize: 25,
+    color: 'white'
   },
   tempContainer: {
     flex: 50,
@@ -44,7 +45,8 @@ var Style = StyleSheet.create({
 
   },
   tempTextContainer: {
-    fontSize: 50
+    fontSize: 50,
+    color: 'white'
   },
   countryContainer: {
 
@@ -53,11 +55,12 @@ var Style = StyleSheet.create({
 
   },
   countryTextContainer: {
-    fontSize: 18
+    fontSize: 18,
+    color: 'white'
   },
   BottomContainer: {
     flex : 25,
-    
+
   }
 });
 

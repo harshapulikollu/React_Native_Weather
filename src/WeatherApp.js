@@ -1,6 +1,6 @@
 /**
  * Sample React Native Weather App
- * https://github.com/harshapulikollu/
+ * https://github.com/harshapulikollu/React_Native_Weather
  * @harshapulikollu
  */
 import React, {Component} from 'react';
