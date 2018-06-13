@@ -3,6 +3,7 @@ import {View, Text, ActivityIndicator, Image} from 'react-native';
 import Style from '../src/Style';
 import FetchWeatherImage from '../src/FetchImage';
 import FetchWeathermtd from '../Api/FetchWeather';
+import FetchBgColor from '../src/FetchColor';
 
 export default class WeatherView extends Component {
   constructor(props){
@@ -16,7 +17,8 @@ export default class WeatherView extends Component {
       icon: FetchWeatherImage('01d'),
       latitude: null,
       longitude: null,
-      error: null
+      error: null,
+      color: FetchBgColor(Math.floor(Math.random() * 10)+1)
     };
   }
 
@@ -34,20 +36,21 @@ componentDidMount(){
           longitude: String(position.coords.longitude),
           error: null,
         });
-        FetchWeathermtd(lat, lon)
-        .then((response) => {
-          let cityDetails = response.city;
-          let weatherList = response.list[0];
-          console.log(weatherList);
-          this.setState({
-            animating: false,
-            temperature: weatherList.main.temp,
-            city: cityDetails.name,
-            country: cityDetails.country,
-            weatherType: weatherList.weather[0].main,
-            icon: FetchWeatherImage(weatherList.weather[0].icon)
-          });
-        });
+        // FetchWeathermtd(lat, lon)
+        // .then((response) => {
+        //   let cityDetails = response.city;
+        //   let weatherList = response.list[0];
+        //   console.log(weatherList);
+        //   this.setState({
+        //     animating: false,
+        //     temperature: weatherList.main.temp,
+        //     city: cityDetails.name,
+        //     country: cityDetails.country,
+        //     weatherType: weatherList.weather[0].main,
+        //     icon: FetchWeatherImage(weatherList.weather[0].icon)
+               color: FetchBgColor(Math.floor(Math.random() * 10)+1)
+        //   });
+        // });
       },
       (error) => this.setState({ error: error.message }),
       { enableHighAccuracy: false, timeout: 200000, maximumAge: 1000 },
@@ -60,7 +63,7 @@ componentDidMount(){
   render (){
     return(
 
-      <View style = {Style.weatherContainer}>
+      <View style = {[Style.weatherContainer, {backgroundColor: this.state.color}]}>
           <ActivityIndicator
            animating = {this.state.animating}
            color = '#bc2b78'
@@ -79,7 +82,7 @@ componentDidMount(){
             </View>
            </View>
            <View style ={Style.BottomContainer}>
-           <Text>Horizantal View</Text>
+           
            </View>
       </View>
 

@@ -31,7 +31,7 @@ var Style = StyleSheet.create({
     flex: 25,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'yellow'
+
   },
   weatherTypeTextConatiner: {
     fontSize: 25
@@ -41,7 +41,7 @@ var Style = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-evenly',
     alignItems: 'center',
-    backgroundColor: 'pink'
+
   },
   tempTextContainer: {
     fontSize: 50
@@ -50,14 +50,14 @@ var Style = StyleSheet.create({
 
     flexDirection: 'column',
     alignItems: 'center',
-    backgroundColor: 'green'
+
   },
   countryTextContainer: {
     fontSize: 18
   },
   BottomContainer: {
     flex : 25,
-    backgroundColor: 'red'
+    
   }
 });
 
