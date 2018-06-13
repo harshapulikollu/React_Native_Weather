@@ -38,8 +38,8 @@ var Style = StyleSheet.create({
   },
   tempContainer: {
     flex: 50,
-    flexDirection: 'row',
-    justifyContent: 'center',
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
     alignItems: 'center',
     backgroundColor: 'pink'
   },
@@ -47,13 +47,17 @@ var Style = StyleSheet.create({
     fontSize: 50
   },
   countryContainer: {
-    flex: 25,
+
     flexDirection: 'column',
     alignItems: 'center',
     backgroundColor: 'green'
   },
   countryTextContainer: {
     fontSize: 18
+  },
+  BottomContainer: {
+    flex : 25,
+    backgroundColor: 'red'
   }
 });
 

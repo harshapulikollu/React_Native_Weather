@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import {Platform, View, Text, ActivityIndicator, Alert} from 'react-native';
+import {View, Text, ActivityIndicator, Image} from 'react-native';
 import Style from '../src/Style';
+import FetchWeatherImage from '../src/FetchImage';
 import FetchWeathermtd from '../Api/FetchWeather';
 
 export default class WeatherView extends Component {
@@ -12,7 +13,7 @@ export default class WeatherView extends Component {
       city: 'Nellore',
       country: 'IN',
       weatherType: 'Sunny',
-      icon: 'Sunny PIC',
+      icon: FetchWeatherImage('01d'),
       latitude: null,
       longitude: null,
       error: null
@@ -33,20 +34,20 @@ componentDidMount(){
           longitude: String(position.coords.longitude),
           error: null,
         });
-        // FetchWeathermtd(lat, lon)
-        // .then((response) => {
-        //   let cityDetails = response.city;
-        //   let weatherList = response.list[0];
-        //   console.log(weatherList);
-        //   this.setState({
-        //     animating: false,
-        //     temperature: weatherList.main.temp,
-        //     city: cityDetails.name,
-        //     country: cityDetails.country,
-        //     weatherType: weatherList.weather[0].main,
-        //     icon: "\uf077" //weatherList.weather[0].icon
-        //   });
-        // });
+        FetchWeathermtd(lat, lon)
+        .then((response) => {
+          let cityDetails = response.city;
+          let weatherList = response.list[0];
+          console.log(weatherList);
+          this.setState({
+            animating: false,
+            temperature: weatherList.main.temp,
+            city: cityDetails.name,
+            country: cityDetails.country,
+            weatherType: weatherList.weather[0].main,
+            icon: FetchWeatherImage(weatherList.weather[0].icon)
+          });
+        });
       },
       (error) => this.setState({ error: error.message }),
       { enableHighAccuracy: false, timeout: 200000, maximumAge: 1000 },
@@ -58,8 +59,9 @@ componentDidMount(){
 
   render (){
     return(
-      <View style = {[Style.weatherContainer, {backgroundColor: 'blue'}]}>
-        <ActivityIndicator
+
+      <View style = {Style.weatherContainer}>
+          <ActivityIndicator
            animating = {this.state.animating}
            color = '#bc2b78'
            size = "large"
@@ -68,17 +70,20 @@ componentDidMount(){
             <Text style = {Style.weatherTypeTextConatiner}>{this.state.weatherType}</Text>
            </View>
            <View style = {Style.tempContainer}>
-             <Text style = {Style.tempTextContainer}>{this.state.temperature}</Text>
-
+           <Image source={{uri: this.state.icon}}
+    style={{width: 100, height: 100}} />
+            <Text style = {Style.tempTextContainer}>{this.state.temperature}</Text>
+            <View style = {Style.countryContainer}>
+              <Text style = {Style.countryTextContainer}>{this.state.city}</Text>
+              <Text style = {Style.countryTextContainer}>{this.state.country}</Text>
+            </View>
            </View>
-           <View style = {Style.countryContainer}>
-             <Text style = {Style.countryTextContainer}>{this.state.city}</Text>
-             <Text style = {Style.countryTextContainer}>{this.state.country}</Text>
+           <View style ={Style.BottomContainer}>
+           <Text>Horizantal View</Text>
            </View>
-
-
-
       </View>
+
+
     );
   }
 }
